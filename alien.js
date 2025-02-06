@@ -18,4 +18,29 @@ export class Alien {
     this.updatePosition();
   }
 
+  updatePosition() {
+    this.element.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
+  }
+
+  update(canvasWidth) {
+    if (this.isExploding) {
+      this.explosionFrame++;
+      return this.explosionFrame < this.explosionFrameCount;
+    }
+
+    const newX = this.x + this.speed * this.direction;
+    
+    if (newX <= 0 || newX + this.width >= canvasWidth) {
+      this.direction *= -1;
+      this.y += 20;
+      this.x += this.speed * this.direction;
+    } else {
+      this.x = newX;
+    }
+    
+    this.updatePosition();
+    return true;
+  }
+
+  
 }
