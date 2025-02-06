@@ -42,5 +42,19 @@ export class Alien {
     return true;
   }
 
-  
+  shoot(projectiles) {
+    const projectile = new Projectile(
+      this.x + this.width / 2,
+      this.y + this.height,
+      5,
+      false
+    );
+    projectiles.push(projectile);
+  }
+
+  explode() {
+    this.isExploding = true;
+    this.explosionFrame = 0;
+    this.element.classList.add('explosion', 'exploding');
+  }
 }
