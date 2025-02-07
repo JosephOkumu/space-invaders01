@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+    font-family: 'Arial', sans-serif;
+    color: #0f0;
+    overflow: hidden;
+  }
+  
+  #game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background: url('./starfield.png');
+  }
+  
+  #game-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .game-object {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    transform: translateZ(0);  /* Force GPU acceleration */
+    will-change: transform;    /* Hint to browser about animation */
+  }
+  
+  .player {
+    width: 48px;
+    height: 48px;
+    background-image: url('./player.png');
+  }
+  
+  .alien {
+    width: 32px;
+    height: 32px;
+    background-image: url('./invader.png');
+  }
+  
+  .projectile {
+    position: absolute;
+    width: 8px;
+    height: 16px;
+  }
+  
+  .player-projectile {
+    background-image: url('./bullet.png');
+  }
+  
+  .alien-projectile {
+    background-image: url('./enemy-bullet.png');
+  }
+  
+  .explosion {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-image: url('./explode.png');
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    color: #0f0;
+    text-align: center;
+    text-shadow: 0 0 10px #0f0;
+    z-index: 1000;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background: transparent;
+    color: #0f0;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-shadow: 0 0 5px #0f0;
+    box-shadow: 0 0 10px #0f0;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background: #0f0;
+    color: #000;
+  }
+  
+  #hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #0f0;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px #0f0;
+    z-index: 100;
+  }
+  
+  #hud > div {
+    margin-bottom: 10px;
+  }
+  
+  @keyframes explosion {
+    0% { background-position: 0 0; }
+    6.25% { background-position: -32px 0; }
+    12.5% { background-position: -64px 0; }
+    18.75% { background-position: -96px 0; }
+    25% { background-position: 0 -32px; }
+    31.25% { background-position: -32px -32px; }
+    37.5% { background-position: -64px -32px; }
+    43.75% { background-position: -96px -32px; }
+    50% { background-position: 0 -64px; }
+    56.25% { background-position: -32px -64px; }
+    62.5% { background-position: -64px -64px; }
+    68.75% { background-position: -96px -64px; }
+    75% { background-position: 0 -96px; }
+    81.25% { background-position: -32px -96px; }
+    87.5% { background-position: -64px -96px; }
+    93.75% { background-position: -96px -96px; }
+    100% { background-position: -96px -96px; }
+  }
+  
+  .exploding {
+    animation: explosion 1s steps(1) forwards;
+  }
