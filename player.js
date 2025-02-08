@@ -8,11 +8,51 @@ export class Player {
     this.height = 48;
     this.speed = 5;
     this.movingDirection = 0;
-    
+
+    // Invincibility properties
+    this.isInvincible = false;
+    this.invincibilityDuration = 2000; // 2 seconds
+    this.invincibilityEndTime = 0;
+    this.blinkInterval = null; // Interval for blinking
+
     this.element = document.createElement('div');
     this.element.className = 'game-object player';
     document.getElementById('game-area').appendChild(this.element);
     this.updatePosition();
+  }
+
+  // Add a method to activate invincibility
+  activateInvincibility() {
+    this.isInvincible = true;
+    this.invincibilityEndTime = Date.now() + this.invincibilityDuration;
+
+    // Start blinking
+    this.startBlinking();
+  }
+
+  // Add a method to start blinking
+  startBlinking() {
+    const blinkSpeed = 200; // Blink every 200ms
+    this.blinkInterval = setInterval(() => {
+      this.element.style.opacity = this.element.style.opacity === '0.5' ? '1' : '0.5';
+    }, blinkSpeed);
+  }
+
+  // Add a method to stop blinking
+  stopBlinking() {
+    if (this.blinkInterval) {
+      clearInterval(this.blinkInterval); // Stop the blinking interval
+      this.blinkInterval = null;
+    }
+    this.element.style.opacity = '1'; // Ensure player is fully visible
+  }
+
+  // Add a method to update invincibility state
+  updateInvincibility() {
+    if (this.isInvincible && Date.now() >= this.invincibilityEndTime) {
+      this.isInvincible = false;
+      this.stopBlinking(); // Stop blinking when invincibility ends
+    }
   }
 
   setMoving(direction) {

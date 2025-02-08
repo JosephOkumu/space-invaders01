@@ -112,6 +112,7 @@ export class Game {
 
   update(deltaTime) {
     if (this.gameOver) return;
+    this.player.updateInvincibility();
 
     // Calculate time-based movement
     const timeScale = deltaTime / 16.667; // normalize to 60 FPS
@@ -207,13 +208,20 @@ export class Game {
         return true;
       });
     });
-
+  
     // Alien projectiles vs player
     this.alienProjectiles.forEach(projectile => {
-      if (this.collisionManager.checkCollision(projectile, this.player)) {
+      if (
+        !this.player.isInvincible && // Only check collision if player is not invincible
+        this.collisionManager.checkCollision(projectile, this.player)
+      ) {
         projectile.isActive = false;
         this.lives--;
-        if (this.lives <= 0) this.endGame();
+        if (this.lives <= 0) {
+          this.endGame();
+        } else {
+          this.player.activateInvincibility(); // Activate invincibility when hit
+        }
       }
     });
   }

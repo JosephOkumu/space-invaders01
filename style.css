@@ -38,6 +38,7 @@ body {
     width: 48px;
     height: 48px;
     background-image: url('./player.png');
+    transition: opacity 0.3s ease-in-out;
   }
   
   .alien {
