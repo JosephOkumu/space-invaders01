@@ -15,6 +15,9 @@ export class Player {
     this.invincibilityEndTime = 0;
     this.blinkInterval = null; // Interval for blinking
 
+    // Load the shoot sound
+    this.shootSound = new Audio('./shoot.wav'); 
+
     this.element = document.createElement('div');
     this.element.className = 'game-object player';
     document.getElementById('game-area').appendChild(this.element);
@@ -75,6 +78,10 @@ export class Player {
   }
 
   shoot(projectiles) {
+    // Reset the sound to the beginning and play it
+    this.shootSound.currentTime = 0; // Reset the sound to the start
+    this.shootSound.play(); // Play the sound
+
     const projectile = new Projectile(
       this.x + this.width / 2,
       this.y,
