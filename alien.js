@@ -16,6 +16,7 @@ export class Alien {
     this.explosionFrameCount = 16;
     
     this.updatePosition();
+    this.alienExplode = new Audio('./enemy-death.wav');
   }
 
   updatePosition() {
@@ -56,5 +57,6 @@ export class Alien {
     this.isExploding = true;
     this.explosionFrame = 0;
     this.element.classList.add('explosion', 'exploding');
+    this.alienExplode.play();
   }
 }
