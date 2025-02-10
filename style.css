@@ -123,8 +123,8 @@ body {
   }
   
   @keyframes explosion {
-    0% { background-position: 0 0; }
-    6.25% { background-position: -32px 0; }
+    0% { transform: translate3d(0, 0, 0); background-position: 0 0; }
+    6.25% { transform: translate3d(0, 0, 0); background-position: -32px 0; }
     12.5% { background-position: -64px 0; }
     18.75% { background-position: -96px 0; }
     25% { background-position: 0 -32px; }
@@ -139,7 +139,7 @@ body {
     81.25% { background-position: -32px -96px; }
     87.5% { background-position: -64px -96px; }
     93.75% { background-position: -96px -96px; }
-    100% { background-position: -96px -96px; }
+    100% { transform: translate3d(0, 0, 0); background-position: -96px -96px; }
   }
   
   .exploding {
